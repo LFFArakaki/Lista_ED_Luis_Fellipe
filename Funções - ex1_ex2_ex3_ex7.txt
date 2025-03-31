@@ -1,0 +1,9 @@
+Funções
+
+1 - "24362 3"
+
+2 - "244 2"
+
+3 - "8 9 3 0 ? 5 17"
+
+7 - As funções f1 e f2 se chamam recursivamente, gerando um loop infinito
