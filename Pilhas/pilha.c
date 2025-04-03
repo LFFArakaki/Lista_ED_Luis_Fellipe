@@ -64,3 +64,31 @@ t_pilha juntar_pilhas_decrescente(t_pilha *pilhaA, t_pilha *pilhaB){
 
     return pilhaFinal;
 }
+//Ex. 8
+void transferir_pilha(t_pilha *transfere, t_pilha *recebe){
+    t_pilha pilha_aux;
+    int aux;
+    construir_pilha(transfere->topo, &pilha_aux);
+    while(pop(&aux, transfere)) push(aux, &pilha_aux);
+    while(pop(&aux, &pilha_aux)) push(aux, recebe);
+    return;
+}
+//Ex. 9
+int procurar_dado(int dado, t_pilha *pilha){
+    t_pilha pilha_aux;
+    int aux, posicao = -1, i = 1;
+
+    construir_pilha(pilha->topo, &pilha_aux);
+    while(pop(&aux, pilha))
+    {
+        push(aux, &pilha_aux);
+        if(aux == dado)
+        {
+            posicao = i;
+            break;
+        } 
+        i++;
+    }
+    while(pop(&aux, &pilha_aux)) push(aux, pilha);
+    return posicao;
+}

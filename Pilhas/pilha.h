@@ -17,3 +17,5 @@ int pop_n_elementos(int n, t_pilha *pilha);
 void inverter_pilha(t_pilha *pilha);
 void separar_pilha(t_pilha *original, t_pilha *par, t_pilha *impar);
 t_pilha juntar_pilhas_decrescente(t_pilha *pilhaA, t_pilha *pilhaB);
+void transferir_pilha(t_pilha *transfere, t_pilha *recebe);
+int procurar_dado(int dado, t_pilha *pilha);
