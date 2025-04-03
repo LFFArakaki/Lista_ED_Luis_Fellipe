@@ -2,12 +2,19 @@
 
 int main()
 {
-    char string[50];
+    char frase[50], expressao[20];
     
-    fgets(string, 50, stdin);
+    //Teste Ex.5.a
+    fgets(frase, 50, stdin);
     
-    if(!e_palindromo(string)) printf("Nao e palindromo!\n");
+    if(!e_palindromo(frase)) printf("Nao e palindromo!\n");
     else printf("E palindromo!\n");
+    
+    //Teste Ex.5.b
+    scanf("%s",expressao);
+    
+    if(parenteses_corretos(expressao)) printf("Expressao valida!");
+    else printf("Expressao invalida!");
 
     return 0;
 }

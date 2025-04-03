@@ -41,51 +41,6 @@ void inverter_pilha(t_pilha_char *pilha){
     pilha->dados = pilha_aux.dados;
     pilha->topo = pilha_aux.topo;
 }
-//Ex. 5.a
-/*int parenteses_corretos(char *expressao){
-    t_pilha_char checa;
-    char aux, comp = NULL;
-    int i = 0;
-
-    construir_pilha(strlen(expressao),&checa);
-    while(push(expressao[i++], &checa));
-    while(pop(&aux,&checa))
-    {
-        if(comp == NULL) comp = aux;
-        if(comp != ')' && comp != ']' && comp != '}')
-        {
-            if(comp == '(' || comp == '[' || comp == '{') return 0;
-            else comp = NULL;
-        }
-    }
-}*/
-//Ex. 5.b
-int e_palindromo(char *frase){
-    t_pilha_char checa;
-    char *sem_espaco, aux;
-    int i = 0, cont = 0, tamanho = strlen(frase);
-
-    for(i=0;i<tamanho;i++)
-    {
-        if(frase[i] != ' ' && frase[i] != '\n')
-        {
-            cont++;
-            if(cont == 1) sem_espaco = (char *)malloc(sizeof(char));
-            else sem_espaco = (char *)realloc(sem_espaco, sizeof(char)*cont);
-            sem_espaco[cont-1] = frase[i];
-        }
-    }
-    i = 0;
-    construir_pilha(cont, &checa);
-    while(push(sem_espaco[i++], &checa));
-    i = 0;
-    for(i=0;i<cont/2;i++)
-    {
-        pop(&aux, &checa);
-        if(sem_espaco[i] != aux) return 0;
-    }
-    return 1;
-}
 void transferir_pilha(t_pilha_char *transfere, t_pilha_char *recebe){
     t_pilha_char pilha_aux;
     char aux;
@@ -112,4 +67,53 @@ int procurar_dado(int dado, t_pilha_char *pilha){
     }
     while(pop(&aux, &pilha_aux)) push(aux, pilha);
     return posicao;
+}
+//Ex. 5.a
+int parenteses_corretos(char *expressao){
+    t_pilha_char checa;
+    char aux, temp, comp = ' ';
+    int i = 0;
+
+    construir_pilha(strlen(expressao),&checa);
+    while(push(expressao[i++], &checa));
+    while(pop(&aux,&checa))
+    {
+        temp = aux;
+        if(temp == '(' || temp == '{' || temp == '[')
+        {
+            if(comp == ' ') return 0;
+            else if((comp - temp) > 2) return 0;
+            else comp = ' ';
+        } 
+        if(temp == ')' || temp == '}' || temp == ']') comp = temp;
+    }
+    if(comp != ' ') return 0;
+    return 1;
+}
+//Ex. 5.b
+int e_palindromo(char *frase){
+    t_pilha_char checa;
+    char *sem_espaco, aux;
+    int i = 0, cont = 0, tamanho = strlen(frase);
+
+    for(i=0;i<tamanho;i++)
+    {
+        if(frase[i] != ' ' && frase[i] != '\n')
+        {
+            cont++;
+            if(cont == 1) sem_espaco = (char *)malloc(sizeof(char));
+            else sem_espaco = (char *)realloc(sem_espaco, sizeof(char)*cont);
+            sem_espaco[cont-1] = frase[i];
+        }
+    }
+    i = 0;
+    construir_pilha(cont, &checa);
+    while(push(sem_espaco[i++], &checa));
+    i = 0;
+    for(i=0;i<cont/2;i++)
+    {
+        pop(&aux, &checa);
+        if(sem_espaco[i] != aux) return 0;
+    }
+    return 1;
 }
